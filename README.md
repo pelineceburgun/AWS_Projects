@@ -1,8 +1,77 @@
-This repository contains documentation of my AWS projects based on different services.
+# 📘 AWS Projects Documentation
 
-Projects:
+This repository contains documentation of my hands-on AWS projects, each focused on learning and applying different AWS services through practical, real-world scenarios.
 
--Host a Static Website Using S3: Hosted a static website using an Amazon S3 bucket.
--Analytics with QuickSight: Analyzed a Netflix dataset using AWS QuickSight.
--AI Lex - Chatbot Development: Created a chatbot using Amazon Lex.
--AI Lex - Part 2: Enhanced the previous chatbot by adding customizations and extra features.
+## 🚀 Projects
+
+### 🔐 IAM & EC2 Access Management 
+**Services:** AWS IAM, Amazon EC2
+
+In this project, I worked on managing authentication and authorization in AWS by simulating a real-world DevOps scenario at NextWork.
+
+**What I did:**
+- Launched development and production EC2 instances
+- Used EC2 tags to separate environments
+- Created IAM policies with tag-based access control
+- Set up IAM user groups and users (intern onboarding)
+- Restricted intern access to development resources only
+- Tested permissions using the IAM Policy Simulator
+- Configured an Account Alias for easier login
+
+**Key Concepts Learned:**
+- Principle of least privilege
+- Tag-based access control
+- Secure user and permission management
+- Safe policy testing without impacting production
+
+---
+
+### 🌐 Host a Static Website Using S3
+**Services:** Amazon S3
+
+Hosted a static website using an Amazon S3 bucket.
+
+**Key Implementations:**
+- Bucket configuration for static website hosting
+- Public access settings
+- Object permissions and access policies
+
+---
+
+### 📊 Analytics with QuickSight
+**Services:** AWS QuickSight
+
+Analyzed a Netflix dataset using AWS QuickSight.
+
+**Key Implementations:**
+- Importing and preparing data
+- Creating visual dashboards
+- Gaining insights through interactive analytics
+
+---
+
+### 🤖 AI Lex – Chatbot Development
+**Services:** Amazon Lex
+
+Built a conversational chatbot using Amazon Lex.
+
+**Key Focus Areas:**
+- Intents, utterances, and slots
+- Basic conversation flows
+- Testing and deploying the chatbot
+
+---
+
+### 🤖 AI Lex – Part 2 (Advanced Features)
+**Services:** Amazon Lex
+
+Enhanced the chatbot with advanced capabilities.
+
+**Key Improvements:**
+- Adding custom responses
+- Improving conversation logic
+- Implementing additional features and refinements
+
+## 🎯 Purpose of This Repository
+
+This repository serves as a learning journal and portfolio to document my progress with AWS services, cloud security, analytics, and AI-based solutions through hands-on projects.

@@ -72,6 +72,20 @@ Enhanced the chatbot with advanced capabilities.
 - Improving conversation logic
 - Implementing additional features and refinements
 
+### 🌐 Build a Secure VPC
+**Services:** Amazon VPC, Subnets, Internet Gateway
+Designed and deployed a Virtual Private Cloud (VPC) to create a secure and organized cloud network environment.
+
+**Key Implementations:**
+
+-Created a VPC with a custom IPv4 CIDR block
+
+-Divided the VPC into public and private subnets
+
+-Enabled auto-assign public IPv4 addresses for the public subnet
+
+-Created and attached an Internet Gateway to allow internet connectivity
+
 ## 🎯 Purpose of This Repository
 
 This repository serves as a learning journal and portfolio to document my progress with AWS services, cloud security, analytics, and AI-based solutions through hands-on projects.

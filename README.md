@@ -85,6 +85,19 @@ Designed and deployed a Virtual Private Cloud (VPC) to create a secure and organ
 -Enabled auto-assign public IPv4 addresses for the public subnet
 
 -Created and attached an Internet Gateway to allow internet connectivity
+### 🌐 VPC Traffic Flow & Security
+**Services:** Amazon VPC, Subnets, Internet Gateway, Route Tables, Security Groups, Network ACLs
+
+Designed and deployed a secure VPC network in AWS, focusing on traffic flow management and layered security controls.
+
+**Key Implementations:**
+
+-Configured public and private subnets to segment resources
+-Attached an Internet Gateway and set up route tables to direct traffic
+-Implemented security groups to control inbound/outbound traffic at the resource level
+-Configured Network ACLs for additional subnet-level traffic control
+-Applied security best practices for both inbound and outbound traffic rules
+
 
 ## 🎯 Purpose of This Repository
 

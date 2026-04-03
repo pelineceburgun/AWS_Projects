@@ -92,6 +92,7 @@ Designed and deployed a secure VPC network in AWS, focusing on traffic flow mana
 
 **Key Implementations:**
 
+
 -Configured public and private subnets to segment resources
 -Attached an Internet Gateway and set up route tables to direct traffic
 -Implemented security groups to control inbound/outbound traffic at the resource level

@@ -99,6 +99,15 @@ Designed and deployed a secure VPC network in AWS, focusing on traffic flow mana
 -Configured Network ACLs for additional subnet-level traffic control
 -Applied security best practices for both inbound and outbound traffic rules
 
+### 🌐 Creating a Private Subnet
+**Services:** Amazon VPC, Subnets, Route Tables, Network ACLs
+Extended the secure VPC architecture by adding a private subnet with dedicated routing and access control, isolating backend resources from the public internet.
+Key Implementations:
+- Created a private subnet within an existing VPC
+- Built a dedicated private route table with local-only routing (no internet gateway route)
+- Detached the private subnet from the main route table to prevent accidental internet exposure
+- Configured a custom Network ACL for the private subnet allowing only intra-VPC traffic
+- Applied defense-in-depth principles using both route table isolation and NACL restrictions
 
 ## 🎯 Purpose of This Repository
 

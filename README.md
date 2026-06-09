@@ -111,7 +111,7 @@ Key Implementations:
 ### 🚀 Launching VPC Resources
 **Services:** Amazon VPC, Amazon EC2, Key Pairs, Security Groups
 Launched EC2 instances within the custom VPC infrastructure to understand secure cloud compute deployment and remote access patterns.
-Key Implementations:
+**Key Implementations:**
 -Created a new EC2 instance (t2.micro) within the custom VPC
 -Generated and downloaded an SSH key pair for secure authentication
 -Configured security group rules to allow SSH (port 22) access from my IP address

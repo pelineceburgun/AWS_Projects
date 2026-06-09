@@ -108,6 +108,18 @@ Key Implementations:
 - Detached the private subnet from the main route table to prevent accidental internet exposure
 - Configured a custom Network ACL for the private subnet allowing only intra-VPC traffic
 - Applied defense-in-depth principles using both route table isolation and NACL restrictions
+### 🚀 Launching VPC Resources
+**Services:** Amazon VPC, Amazon EC2, Key Pairs, Security Groups
+Launched EC2 instances within the custom VPC infrastructure to understand secure cloud compute deployment and remote access patterns.
+Key Implementations:
+-Created a new EC2 instance (t2.micro) within the custom VPC
+-Generated and downloaded an SSH key pair for secure authentication
+-Configured security group rules to allow SSH (port 22) access from my IP address
+-Assigned the EC2 instance to the public subnet within the VPC
+-Enabled auto-assign public IPv4 address for direct internet accessibility
+-Connected to the EC2 instance via SSH using the private key (.pem format)
+-Verified instance connectivity and tested basic commands
+
 
 ## 🎯 Purpose of This Repository
 

@@ -130,10 +130,33 @@ Tested the connectivity of the custom AWS VPC by establishing internal and exter
 
 **Key Implementations:**
 * Connected to a Public Server using EC2 Instance Connect for direct SSH access.
-* Troubleshooted connection errors by configuring Security Group inbound rules for SSH traffic.
+* Troubleshot connection errors by configuring Security Group inbound rules for SSH traffic.
 * Tested internal EC2-to-EC2 communication across public and private subnets using the `ping` (ICMP) command.
 * Resolved ICMP blockages by updating Private Subnet Network ACLs and Private Security Group rules.
 * Verified outbound internet access by running `curl` commands to fetch external HTML data.
+
+---
+
+### 🌉 VPC Peering
+**Services:** Amazon VPC, Amazon EC2, Elastic IP, VPC Peering  
+Connected two isolated VPCs using a VPC Peering connection, enabling private cross-VPC communication without routing traffic through the public internet.
+
+**Key Implementations:**
+* Created two VPCs (`NextWork-1`: 10.1.0.0/16 and `NextWork-2`: 10.2.0.0/16) with non-overlapping CIDR blocks to prevent routing conflicts.
+* Established a VPC Peering connection between the two VPCs, with one acting as Requester and the other as Accepter.
+* Updated route tables in both VPCs to direct traffic through the peering connection (bidirectional routing).
+* Launched EC2 instances (`t2.micro`) in each VPC's public subnet for connectivity testing.
+* Diagnosed and resolved a missing public IP issue by allocating and associating an Elastic IP address with Instance 1.
+* Fixed SSH access by adding an inbound rule (port 22, Anywhere-IPv4) to VPC 1's default security group.
+* Validated VPC peering by running `ping` (ICMP) from Instance 1 to Instance 2's private IP address.
+* Resolved ICMP blockage by adding an All ICMP - IPv4 inbound rule scoped to VPC 1's CIDR block (10.1.0.0/16) in VPC 2's security group.
+
+**Key Concepts Learned:**
+* VPC Peering as a private, low-latency alternative to public internet routing between VPCs.
+* The importance of non-overlapping CIDR blocks in multi-VPC architectures.
+* Multi-layer AWS networking: peering alone is insufficient — route tables and security groups must each be explicitly configured.
+* Elastic IPs as a mechanism for assigning static public IPv4 addresses to instances post-launch.
+* ICMP traffic control at the security group level for network diagnostics.
 
 ---
 

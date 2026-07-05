@@ -160,6 +160,30 @@ Connected two isolated VPCs using a VPC Peering connection, enabling private cro
 
 ---
 
+### 📊 VPC Monitoring with Flow Logs
+**Services:** Amazon VPC, Amazon EC2, Amazon CloudWatch, VPC Flow Logs, IAM  
+Extended the peered VPC architecture with network monitoring, capturing and analyzing traffic between VPCs to understand real-world network observability practices.
+
+**Key Implementations:**
+* Recreated a two-VPC peered architecture (`NextWork-1`: 10.1.0.0/16, `NextWork-2`: 10.2.0.0/16) with EC2 instances and ICMP-permissive security groups for testing.
+* Diagnosed a failed private-IP ping test by inspecting route tables, identifying a missing peering route as the root cause (not a security group issue).
+* Created a VPC Peering connection and updated both VPCs' route tables to enable bidirectional private routing.
+* Created a CloudWatch Log Group (`NextWorkVPCFlowLogsGroup`) as the destination for captured traffic data.
+* Built a custom IAM Policy granting `logs:CreateLogGroup`, `CreateLogStream`, `PutLogEvents`, `DescribeLogGroups`, and `DescribeLogStreams` permissions.
+* Built an IAM Role with a custom trust policy scoped exclusively to `vpc-flow-logs.amazonaws.com`, following least-privilege principles.
+* Configured a VPC Flow Log (Filter: All, 1-minute aggregation interval) sending data to the CloudWatch log group.
+* Validated the pipeline by generating ICMP traffic and confirming ACCEPT/REJECT entries appeared in the flow logs.
+* Used CloudWatch Logs Insights to run the "Top 10 byte transfers by source and destination IP" query, identifying the highest-volume traffic pairs.
+
+**Key Concepts Learned:**
+* VPC Flow Logs as a traffic-level audit trail — every ACCEPT/REJECT decision made by security groups and NACLs is independently recorded and queryable after the fact.
+* IAM policies vs. roles: policies define permissions, roles are the assumable identity a service uses to exercise those permissions — a service can't use a policy directly.
+* Custom trust policies as a way to scope role assumption to a single named service, reducing blast radius if a role is misconfigured elsewhere.
+* CloudWatch Logs Insights as a query layer over raw log data, turning individual flow log entries into aggregate traffic insights (e.g., top talkers by byte volume).
+* Peering connections require both an accepted connection *and* explicit route table entries in both VPCs — the connection alone establishes no path.
+
+---
+
 ## 🎯 Purpose of This Repository
 
 This repository serves as a learning journal and portfolio to document my progress with AWS services, cloud security, analytics, and AI-based solutions through hands-on projects.

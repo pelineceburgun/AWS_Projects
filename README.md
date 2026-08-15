@@ -184,6 +184,24 @@ Extended the peered VPC architecture with network monitoring, capturing and anal
 
 ---
 
+### 🪣 Access S3 from a VPC
+**Services:** Amazon VPC, Amazon EC2, Amazon S3, AWS CLI, AWS IAM  
+Configured secure programmatic access to Amazon S3 from an EC2 instance residing within a custom VPC.
+
+**Key Implementations:**
+* Launched an EC2 instance (`t2.micro`) within a custom VPC and established a connection via EC2 Instance Connect.
+* Created a new set of IAM Access Keys for the root/admin user to enable programmatic access to AWS services.
+* Configured the AWS Command Line Interface (CLI) directly on the EC2 instance using the `aws configure` command.
+* Created a new General Purpose Amazon S3 Bucket and uploaded local files via the AWS Management Console.
+* Interacted with the S3 bucket entirely from the EC2 terminal, using commands like `aws s3 ls` to list contents and `aws s3 cp` to upload new files created directly on the Linux server.
+
+**Key Concepts Learned:**
+* **AWS CLI Mastery:** Utilizing the command line as a powerful, scriptable alternative to the AWS Management Console.
+* **Service Boundaries:** Understanding that S3 exists outside of the VPC and requires explicit authentication to interact with internal VPC resources.
+* **IAM Credentials:** Practical application of Access Keys (Access Key ID and Secret Access Key), while recognizing that attaching IAM Roles to EC2 instances is the industry best practice for production environments.
+
+---
+
 ## 🎯 Purpose of This Repository
 
 This repository serves as a learning journal and portfolio to document my progress with AWS services, cloud security, analytics, and AI-based solutions through hands-on projects.

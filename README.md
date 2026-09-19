@@ -169,7 +169,7 @@ Extended the peered VPC architecture with network monitoring, capturing and anal
 * Diagnosed a failed private-IP ping test by inspecting route tables, identifying a missing peering route as the root cause (not a security group issue).
 * Created a VPC Peering connection and updated both VPCs' route tables to enable bidirectional private routing.
 * Created a CloudWatch Log Group (`NextWorkVPCFlowLogsGroup`) as the destination for captured traffic data.
-* Built a custom IAM Policy granting `logs:CreateLogGroup`, `CreateLogStream`, `PutLogEvents`, `DescribeLogGroups`, and `DescribeLogStreams` permissions.
+* Built a custom IAM Policy granting log management permissions.
 * Built an IAM Role with a custom trust policy scoped exclusively to `vpc-flow-logs.amazonaws.com`, following least-privilege principles.
 * Configured a VPC Flow Log (Filter: All, 1-minute aggregation interval) sending data to the CloudWatch log group.
 * Validated the pipeline by generating ICMP traffic and confirming ACCEPT/REJECT entries appeared in the flow logs.
@@ -177,10 +177,9 @@ Extended the peered VPC architecture with network monitoring, capturing and anal
 
 **Key Concepts Learned:**
 * VPC Flow Logs as a traffic-level audit trail — every ACCEPT/REJECT decision made by security groups and NACLs is independently recorded and queryable after the fact.
-* IAM policies vs. roles: policies define permissions, roles are the assumable identity a service uses to exercise those permissions — a service can't use a policy directly.
-* Custom trust policies as a way to scope role assumption to a single named service, reducing blast radius if a role is misconfigured elsewhere.
-* CloudWatch Logs Insights as a query layer over raw log data, turning individual flow log entries into aggregate traffic insights (e.g., top talkers by byte volume).
-* Peering connections require both an accepted connection *and* explicit route table entries in both VPCs — the connection alone establishes no path.
+* IAM policies vs. roles: policies define permissions, roles are the assumable identity a service uses.
+* Custom trust policies as a way to scope role assumption to a single named service, reducing blast radius.
+* CloudWatch Logs Insights as a query layer over raw log data.
 
 ---
 
@@ -198,7 +197,27 @@ Configured secure programmatic access to Amazon S3 from an EC2 instance residing
 **Key Concepts Learned:**
 * **AWS CLI Mastery:** Utilizing the command line as a powerful, scriptable alternative to the AWS Management Console.
 * **Service Boundaries:** Understanding that S3 exists outside of the VPC and requires explicit authentication to interact with internal VPC resources.
-* **IAM Credentials:** Practical application of Access Keys (Access Key ID and Secret Access Key), while recognizing that attaching IAM Roles to EC2 instances is the industry best practice for production environments.
+* **IAM Credentials:** Practical application of Access Keys, while recognizing that attaching IAM Roles to EC2 instances is the industry best practice for production environments.
+
+---
+
+### 🚪 Secure AWS Service Access with VPC Endpoints
+**Services:** Amazon VPC, Amazon EC2, Amazon S3, VPC Endpoints, AWS IAM, Route Tables  
+Secured communication between a custom VPC and Amazon S3 by routing traffic privately through a VPC Gateway Endpoint, completely bypassing the public internet to mitigate security risks.
+
+**Key Implementations:**
+* Created a **VPC Gateway Endpoint** specifically for Amazon S3 to establish a direct, private connection.
+* Configured the AWS CLI on an EC2 instance using IAM credentials to programmatically interact with the S3 bucket.
+* Authored and applied a strict **S3 Bucket Policy** that denied all access (including AWS Management Console access) unless the traffic explicitly originated from the newly created VPC Endpoint ID (`aws:sourceVpce`).
+* Updated the public subnet's route table to ensure all S3-bound traffic was routed to the Gateway Endpoint rather than the Internet Gateway.
+* Validated the secure private connection by successfully executing `aws s3 ls` and `aws s3 cp` commands from the EC2 instance terminal.
+* Experimented with **VPC Endpoint Policies**, toggling between `Allow` and `Deny` rules to test granular network access controls and observe instant connection blocking.
+* Mastered recursive S3 CLI commands (`aws s3 rm --recursive` and `aws s3 rb`) to empty and delete the highly restricted bucket, as console deletion was blocked by the custom policy.
+
+**Key Concepts Learned:**
+* **VPC Endpoints:** The architectural mechanism for connecting VPCs privately to supported AWS services, keeping traffic entirely within the AWS global network.
+* **Gateway Endpoints:** Understanding that Gateway Endpoints (specifically for S3 and DynamoDB) function by dynamically updating VPC route tables.
+* **Defense in Depth:** The powerful combination of resource-based policies (Bucket Policies) and network-based policies (Endpoint Policies) to create highly restrictive, zero-trust cloud environments.
 
 ---
 
